@@ -50,3 +50,28 @@ function binarySearch(arr, a){
   return arr[point]===a ? point : -1; // 위의 마지막 리턴 코드를 삼항연산자를 사용해서 표현
 }
 
+// 이진 검색 빅오
+// 이진 검색의 시간 복잡도. 최악의&평균적인 경우 : O(log n) / 최선의 경우 : O(1) - 굉장히 효율적임.
+
+// 나이브 문자열 검색(Naive String Search)
+// 긴 문자열에서 부분 문자열(substring)을 검색하는 작업에서 사용되는 가장 기본적이고 흔한 방식.
+// 긴 문자열에서 짧은 문자열이 등장하는 횟수 - 문자쌍을 하나씩 확인.
+
+// 긴 문자열을 반복하는 루프 작성 - 문자열 두개를 사용하는 함수(문자열검색), 긴 문자열과 찾는 패턴을 인자로 전달받음 - 긴 문자의 각 문자를 반복, 짧은 문자열을 반복하는 루프 작성 - 확인. 문자가 일치하지 않으면 내부루프를 벗어남. - 문자가 일치하면 다음 문자로 넘어감. 
+
+function naiveSearch(long, short){ // 긴 문자열과 짧은 문자열을 인자로 받음
+  let count = 0; // 일치하는 문자열이 생겼을 때 증가.
+  for(let i = 0; i<long.length; i++){
+    for(let j =0; j<short.length; j++){
+      if(short[j] !== long[i+j]){ // 짧은 문자열의 j가 긴 문자열의 i에 j를 더한 것과 일치하는지 확인. 일치하지 않으면 루프 벗어남.
+        break; // 짧은 루프에서 빠져나와 j는 0부터 다시 시작, i는 +1.
+      };
+      if(j===short.length-1){ // j가 short 문자열의 끝까지 도착했을 경우(=long에서 short와 모두 일치하는 문자열을 발견했을 경우) count증가.
+        count++;
+      };
+    };
+  };
+  return count;
+}
+
+naiveSearch("lorie loled", "lol");
