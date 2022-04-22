@@ -85,3 +85,50 @@ function quickSort(arr, left=0, right=arr.length-1){
 quickSort([4,6,9,1,2,5,3]);
 
 // 시간 복잡도 : best&average - O(n log n) , worst - O(n²) (데이터가 정렬되어있는 경우. 중간 혹은 무작위 값을 고르는게 그나마 좋음) / 공간 복잡도 : O(log n)
+
+// 기수 정렬 (Radix sort)
+// 비교를 수행하지 않음. 숫자로 작동. 이진수 이용.
+// 숫자 크기에 대한 정보를 자릿수로 인코딩한다는 사실을 이용. 자릿수가 더 큰 수가 더 작은 수보다 큼. 네 자리 수는 두 자리 수보다 더 큼.
+
+// 헬퍼 함수 - 자릿수 알아내기
+function getDigit(num, i){
+  return Math.floor(Math.abs(num) / Math.pow(10,i))%10;
+  // Math.abs : 절댓값 계산. 음수일 때 작동. / Math.pow : 제곱계산. 10의 2승은 100.
+  // 7323 % 100 > 내림(floor) : 73 > 73을 10으로 나눌 때의 나머지 : 3
+};
+//ex)
+getDigit(7323,2);
+
+// 가장 큰 수에 따라 반복횟수가 바뀜. 네자리 수가 가장 크다면 네번 반복. 
+// 가장 큰 수를 찾는 함수
+function digitCount(num){
+  if(num===0) return 1;
+  // 
+  return Math.floor(Math.log10(Math.abs(num))) + 1;
+  // 수의 절댓값을 계산한 후 > log10 계산(ex.423일 경우 2.626...) > floor을 이용해 내림. 2 + 1을 이용해 자릿수 반환.
+}
+
+// 최대 자릿수
+// 수 목록을 가져와 가장 자릿수가 많은 수가 무엇인지 반환
+function mostDigits(nums){
+  let maxDigits = 0;
+  for(let i = 0; i<nums.length; i++){
+    maxDigits = Math.max(maxDigits, digitCount(nums[i]));
+  }
+  return maxDigits;
+}
+
+// 기수 정렬
+function radixSort(nums){
+  let maxDigitsCount = mostDigits(nums);
+  for(let k = 0; k<maxDigitsCount; k++){
+    let digitBuckets = Array.from({length:10}, () => []);
+    for(let i = 0; i<nums.length; i++){
+      let digit = getDigit(nums[i],k);
+      digitBuckets[digit].push(nums[i]);
+    } // 자릿수 구하는 부분
+    nums = [].concat(...digitBuckets);
+  }
+}
+
+// 시간 복잡도 : O(nk) / 공간 복잡도 : O(n+k);
