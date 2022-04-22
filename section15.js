@@ -1,5 +1,9 @@
 // 정렬 알고리즘2 (더 어렵지만 더 빠름)
 
+function swap2(arr, idx1, idx2){
+  [arr[idx1],arr[idx2]] = [arr[idx2], arr[idx1]];
+}
+
 // 합병 정렬(Merge sort)
 // 배열을 더 작은 배열로 나눔. 분할 정복 알고리즘. 0이나 1요소가 될 때까지 반복. 분할한 다음 다시 병합.
 // 시간 복잡도 : O(n log n)
@@ -44,3 +48,40 @@ function mergeSort(arr){ // 합병 정렬
 }
 
 // 시간 복잡도 : 가장 좋을 때, 평균, 가장 나쁠 때 - O(n log n), 공간 복잡도 - O(n)
+
+
+// 퀵 정렬
+// 배열에 0개 또는 1개의 항목이 남을 때까지 데이터를 분할하여 개별적으로 정렬.(합병과 같은 시작)
+// 피벗 포인트라는 단일 요소를 선택하여 수행.
+// ex) 중간 포인트를 설정. 해당 숫자보다 작은 숫자를 왼쪽으로, 큰 숫자를 오른쪽으로 이동. 해당 숫자는 정위치가 됨. 이를 재귀적으로 반복.
+
+// 피봇 헬퍼 함수 - 인덱스를 반환. 배열을 반환하지 않음.
+// 배열, 시작 인덱스(기본값 0), 끝 인덱스라(기본값 arr.length-1)는 세개의 인수를 받음
+function pivot(arr, start=0, end=arr.length-1){
+  let pivot = arr[start];
+  let swapIdx = start; // pivot값을 마지막에 어디로 옮길지 추적
+  for(let i = start+1; i<arr.length;i++){ // 본인과 비교할 필요는 없으므로 start+1
+    if(pivot > arr[i]){
+      swapIdx++; // pivot 보다 작은 수가 있을 경우 swapIdx++
+      swap2(arr, swapIdx, i) // swapIdx와 i를 교환, pivot보다 작은 수를 pivot보다 왼쪽에 두기 위한 작업
+    }
+  }
+  swap2(arr, start, swapIdx); // 루프가 끝난 후 최종적으로 처음 지정한 값을 제자리(찾은 자리)로 이동.
+  return swapIdx;
+}
+
+// 퀵 정렬 구현 - 업데이트된 피벗 인덱스를 헬퍼가 반환하면 피벗 헬퍼를 재귀적으로 왼쪽과 오른쪽에 호출(새로운 배열 작성x)
+function quickSort(arr, left=0, right=arr.length-1){
+  if(left<right){
+    let pivotIndex = pivot(arr,left,right); // arr, 0, 6 // 3
+    // left
+    quickSort(arr, left, pivotIndex-1);
+    //right
+    quickSort(arr, pivotIndex+1, right);
+  };
+  return arr;
+}
+
+quickSort([4,6,9,1,2,5,3]);
+
+// 시간 복잡도 : best&average - O(n log n) , worst - O(n²) (데이터가 정렬되어있는 경우. 중간 혹은 무작위 값을 고르는게 그나마 좋음) / 공간 복잡도 : O(log n)
