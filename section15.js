@@ -131,4 +131,4 @@ function radixSort(nums){
   }
 }
 
-// 시간 복잡도 : O(nk) / 공간 복잡도 : O(n+k);
+// 시간 복잡도 : O(nk) / 공간 복잡도 : O(n+k);  - n : 배열의 길이. k : number of digits(average)
