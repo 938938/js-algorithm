@@ -47,8 +47,38 @@ class SinglyLinkedList{
     return this;
     // 4. 변경된 연결 리스트 반환
   }
+  // traverse(){ // 리스트를 따라가는 방법 중 하나
+  //   let current = this.head; // 처음부터 시작
+  //   while(current){ // current가 존재하는 한 반복해서 수행
+  //     current = current.next;
+  //   }
+  // }
+  // pop은 마지막에서 두번째 노드만 찾으면 되기에 모두 따라갈 필요는 없음
+  // 노드의 끝까지 따라가는 변수와 한 노드 이전 것을 가리키는 변수 사용
+  pop(){
+    if(!this.head) return undefined;
+    let current = this.head; // 끝까지 따라가는 변수
+    let newTail = current; // 한 노드 이전 것을 가리키는 변수
+    while(current.next){// 리스트에 무엇인가 남겨져 있는 동안 계속 반복
+      newTail = current;
+      current = current.next; // current가 마지막 노드에 도착할 때까지 반복(newTail은 그 직전 노드에 위치하게 됨)
+    };
+    this.tail = newTail;
+    this.tail.next = null; // 가장 마지막 노드와의 연결을 끊음
+    this.length--;
+    if(this.length === 0){
+      this.head = null;
+      this.tail = null;
+    }
+    return current;
+  }
+  // 노드가 하나밖에 남지 않은 경우에서 실행하게 되면 newTail과 current가 동일한 것을 가리키게 됨.
+  // 길이가 0이 되는 경우 리스트가 비었다고 설정하는 방법
 }
 
 list = new SinglyLinkedList(); // 새로운 단방향 연결 리스트 생성.
 list.push("hello");
 list.push("goodbye");
+
+// pop 메소드
+// 연결 리스트의 마지막에서 노드 제거
