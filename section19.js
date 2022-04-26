@@ -148,9 +148,27 @@ class SinglyLinkedList{
     this.length--;
     return removed;
   }
+
+  reverse(){ // 리스트를 역방향으로 정렬(자주 사용되진 않음) // node : 현재 노드 변수, next : node의 다음 노드, prev : node의 앞 노드 추적 
+    let node = this.head;
+    this.head = this.tail;
+    this.tail = node;
+    let next;
+    let prev = null;
+    for(i = 0 ; i < this.length ; i++){
+      next = node.next;
+      node.next = prev; // 처음에는 null로 시작
+      prev = node;
+      node = next;
+    }
+    return this;
+  }
 }
 
 list = new SinglyLinkedList(); // 새로운 단방향 연결 리스트 생성.
 list.push("hello");
 list.push("goodbye");
 list.push("!");
+
+// 시간 복잡도
+// Insertion : O(1), Removal : (리스트 가장 앞의 노드를 제거하는 경우) O(1) or (리스트 가장 마지막의 노드를 제거하는 경우) O(n), Searching : O(n) , Access : O(n)
