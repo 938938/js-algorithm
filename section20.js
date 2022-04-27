@@ -21,4 +21,17 @@ class DoublyLinkedList{
     this.tail = null;
     this.length = 0;
   }
+  push(val){ // 노드나 값을 리스트에 추가
+    let newNode = new Node(val); // 값에 입력하는 새로운 노드 생성
+    if(!this.head){ // 리스트 확인. 이미 노드가 있는지 없는지. !this.head : this.head가 거짓일 경우(비어있을 경우) 실행
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      this.tail.next = newNode;
+      newNode.prev = this.tail;
+      this.tail = newNode;
+    }
+    this.length++;
+    return this;
+  }
 }
