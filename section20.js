@@ -141,3 +141,4 @@ class DoublyLinkedList{
 }
 
 // 시간 복잡도 : insert - O(1), Removal = O(1), Searching - O(n), Access - O(n)(O(n/2)라고 할 수 있지만 상수는 생략하므로 O(n))
+// 무언가를 찾을 때 효율적임. But 포인터가 추가로 있기 때문에 메모리를 더 많이 소모함
