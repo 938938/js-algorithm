@@ -7,6 +7,14 @@
 // 너비 우선 탐색
 // 같은 레벨에 있는 모든 노드를 거쳐가는 방식. 형제 노드를 모두 본 후 자식 노드로.
 // 큐(선입선출 구조) 사용(리스트 혹은 배열을 사용)
+
+// 깊이 우선 탐색
+// 수직으로 트리의 끝까지 내려간 후 형제 노드로 넘어감
+// 전위 탐색, 후위 탐색, 정위 탐색
+// 전위 탐색 : 먼저 노드를 방문을 한 후 왼쪽 탐색, 오른쪽 탐색
+// 후위 탐색 : 왼쪽과 오른쪽을 탐색한 후 노드를 방문(루트를 가장 마지막에 방문)
+// 정위 탐색 : 왼쪽 전체를 순회, 노드 방문, 오른쪽 순회
+
 class BinarySearchTree {
   constructor(){
     this.root = null;
@@ -67,4 +75,40 @@ class BinarySearchTree {
     }
     return data;
   }
+
+  DFSPreOrder(){ // 깊이 우선 탐색 - 전위 순회
+    let data = [];
+    function traverse(node){
+      data.push(node.value);
+      if(node.left) traverse(node.left); // 재귀형으로 호출
+      if(node.right) traverse(node.right);
+    }
+    traverse(this.root);
+    return data;
+  }
+  DFSPostOrder(){ // 깊이 우선 탐색 - 후위 순회
+    let data = [];
+    function traverse(node){
+      if(node.left) traverse(node.left);
+      if(node.right) traverse(node.right);
+      data.push(node.value);
+    }
+    traverse(this.root);
+    return data;
+  }
+  DFSInorder(){ // 깊이 우선 탐색 - 정위 순회
+    let data = [];
+    function traverse(node){
+      // if(node.left) traverse(node.left);
+      node.left && traverse(node.left); // 이렇게도 표현할 수 있음
+      data.push(node.value);
+      if(node.right) traverse(node.right);
+    }
+    traverse(this.root);
+    return data;
+  }
 }
+
+// 너비 우선 탐색 vs 깊이 우선 탐색 ( 시간복잡도 : 동일함 - 모든 노드를 한번씩 방문 )
+// 펼쳐져서 넓게 펴진 상태로 아래까지 뻗어나가는 트리의 경우 - 공간 복잡도 : 깊이 우선 탐색이 더 효율적임. 너비 우선 탐색의 경우 큐에 저장하는 양이 많아져 공간 복잡도가 올라감
+// 좁고 깊은 트리의 경우 - 공간 복잡도 : 너비 우선 탐색이 더 효율적임
