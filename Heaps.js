@@ -3,7 +3,7 @@
 // 이진 힙
 // 최대 이진 힙 : 부모 노드가 항상 자식 노드보다 큰 값을 가짐(오른쪽 왼쪽 상관없이)
 // = 모든 자식 노드가 부모보다 작음
-// 최소 이진 힙 : 최대 이진 힙의 반대. 부모 노드가 언제나 양쪽의 자식보다 작음
+// 최소 이진 힙 : 최대 이진 힙의 반대. 부모 노드가 언제나 양쪽의 자식보다 작음(최대 이진 힙의 부등호를 반대로 바꿔주면 됨)
 // 각 노드는 언제나 최대 두개의 자식을 가짐
 // 왼쪽과 오른쪽에 순서는 존재하지 않음
 
@@ -188,5 +188,9 @@ class Node{
   constructor(val, priority){
     this.val = val;
     this.priority = priority;
+    this.insertTime = Date.now(); // 우선순위가 같을 경우 
   }
 }
+
+// 이진 힙의 BigO
+// 시간 복잡도 : Insertion - O(log N), Removal - O(log N), Search = O(n)
