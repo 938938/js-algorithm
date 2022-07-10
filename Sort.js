@@ -30,8 +30,11 @@ function swap2(arr, idx1, idx2){
 }
 
 function bubbleSort1(arr){
-  for(let i = arr.length ; i>0; i--){ // j의 비교값으로 두기 위해 변경
-    for(let j = 0; j<i-1; j++){ // 위와 아래 루프문에 let i = 0; i<arr.length 방식을 사용하면 비교값을 벗어나며, 루프가 반복되어 이미 정렬이 끝난 부분도 다시 비교를 하게 됨.
+  for(let i = arr.length ; i>0; i--){
+    // j의 비교값으로 두기 위해 변경
+    for(let j = 0; j<i-1; j++){
+      // 위와 아래 루프문에 let i = 0; i<arr.length 방식을 사용하면 비교값을 벗어나며,
+      // 루프가 반복되어 이미 정렬이 끝난 부분도 다시 비교를 하게 됨.
       if(arr[j] > arr[j+1]){ // arr[j]가 arr[j+1]보다 크다면 교환 발생
         let temp = arr[j];
         arr[j] = arr[j+1];
@@ -55,7 +58,8 @@ function bubbleSort2(arr){
   return arr;
 };
 
-// 데이터가 거의 정렬되어있는 경우, 루프가 마지막으로 실행되었을 때 교환을 했는지 여부를 확인. 교환이 이루어지지 않았다면 정렬이 끝난 것으로 판단.
+// 데이터가 거의 정렬되어있는 경우, 루프가 마지막으로 실행되었을 때 교환을 했는지 여부를 확인.
+// 교환이 이루어지지 않았다면 정렬이 끝난 것으로 판단.
 function bubbleSort3(arr){
   let noSwaps;
   for(let i = arr.length ; i>0; i--){
@@ -65,7 +69,8 @@ function bubbleSort3(arr){
         let temp = arr[j];
         arr[j] = arr[j+1];
         arr[j+1] = temp;
-        noSwaps = false; // 교환이 이루어질 때 noSwap이 false가 되면서 루프를 반복. 교환이 이루어지지 않으면 true가 되면서 루프를 종료.
+        noSwaps = false;
+        // 교환이 이루어질 때 noSwap이 false가 되면서 루프를 반복. 교환이 이루어지지 않으면 true가 되면서 루프를 종료.
       }
     }
     if(noSwaps) break;
