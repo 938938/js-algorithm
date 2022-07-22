@@ -26,7 +26,8 @@ function fib(n){
 // Memo에 값을 저장하는 방법
 // 배열이나 객체인 데이터를 저장할 구조를 만든 다음, 시간이 오래 걸리는 함수를 실행, 해당 값을 저장.
 
-function fib_dynamic(n, memo=[]){ // memo : 하위 문제들에 대해 이미 찾은 답을 저장하는 장소. 한번이라도 풀었다면 그 답을 저장.
+function fib_dynamic(n, memo=[]){
+  // memo : 하위 문제들에 대해 이미 찾은 답을 저장하는 장소. 한번이라도 풀었다면 그 답을 저장.
   if(memo[n] !== undefined) return memo[n];
   if(n <= 2) return 1;
   let res = fib(n-1, memo) + fib(n-2, memo);
