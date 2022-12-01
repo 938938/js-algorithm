@@ -30,3 +30,29 @@ function solution(k, m, score) {
   }
   return answer
 }
+
+// 문자열 내 p와 y의 개수
+// https://school.programmers.co.kr/learn/courses/30/lessons/12916
+
+function solution(s){
+  // 대소문자가 섞인 s를 소문자로 통일
+  s = s.toLowerCase();
+  let p=[...s].filter(elm=>elm==="p"); // s에 있는 p 모음
+  let y=[...s].filter(elm=>elm==="y"); // s에 있는 y 모음
+  return p.length === y.length; // s와 p의 수가 같은지 비교
+}
+
+// 음양 더하기
+// https://school.programmers.co.kr/learn/courses/30/lessons/76501
+
+function solution(absolutes, signs) {
+  let answer = 0; // 합을 저장할 변수
+  let number = 0; // 수를 저장할 변수
+  for(i=0; i<absolutes.length; i++){
+      if(signs[i]) number = parseInt(absolutes[i]); // signs[i]가 true 면 양수
+      if(!signs[i]) number = parseInt(-absolutes[i]); // signs[i]가 false 면 음수
+      answer += number; // 해당 수 더하기
+  }
+  return answer;
+}
+
