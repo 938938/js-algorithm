@@ -99,3 +99,17 @@ function solution(arr){
   // 배열 안의 다음 아이템과 같은지 확인 후 아닌 것만(중복되지 않은 것만) filter 처리
 }
 
+// 제일 작은 수 제거하기
+// https://school.programmers.co.kr/learn/courses/30/lessons/12935
+
+function solution(arr) {
+  let answer = [];
+  let m = Math.min(...arr); // 배열 arr 에서 가장 작은 수를 추출
+  if(arr.length===1){ // 가장 작은 수를 추출한 결과가 빈배열일 경우 -1 리턴
+      answer = [-1];
+  } else {
+      answer = arr.filter(n=>n !== m); // 아닐 경우, m값(가장 작은 값)을 제외한 배열을 리턴
+  }
+  return answer;
+}
+
