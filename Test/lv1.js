@@ -113,3 +113,16 @@ function solution(arr) {
   return answer;
 }
 
+// 없는 숫자 더하기
+// https://school.programmers.co.kr/learn/courses/30/lessons/86051
+
+function solution(numbers) {
+  let answer = 0;
+  for(i=0;i<10;i++){ // 0부터 9까지 범위 지정
+      if(numbers.indexOf(i) === -1){ // numbers에 해당하는 숫자가 없을 경우(-1)이 나올 경우
+          answer+=i; // 해당 i 추가
+      }
+  }
+  return answer;
+}
+
