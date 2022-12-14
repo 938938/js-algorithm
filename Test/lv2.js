@@ -22,3 +22,18 @@ function solution(A,B){
   return answer;
 }
 
+// 숫자의 표현
+// https://school.programmers.co.kr/learn/courses/30/lessons/12924
+
+function solution(n) {
+  let answer = 0;
+  if(n === 1) return 1;
+  for(let i=1; i<n; i++){
+      let temp = n+1-i;
+      if(temp%i === 0){
+          answer++;
+      }
+      n = temp;
+  }
+  return answer;
+}
